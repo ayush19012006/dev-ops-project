@@ -1,0 +1,10 @@
+# Example variable values for this Terraform module.
+# Copy this file to terraform.tfvars and fill in real values.
+# IMPORTANT: do NOT commit terraform.tfvars - it contains a secret
+# (the "private_key" variable is marked sensitive = true in variables.tf).
+
+# Must match the region where AMI ami-091b599f5f318ddd2 exists.
+region = "us-east-1"
+
+# Raw PEM contents of the SSH private key (use \n escapes on a single line).
+private_key = "-----BEGIN OPENSSH PRIVATE KEY-----\n...\n-----END OPENSSH PRIVATE KEY-----"
