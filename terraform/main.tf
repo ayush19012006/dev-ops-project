@@ -64,6 +64,10 @@ resource "aws_iam_instance_profile" "ec2_profile" {
   role = "EC2-ECR-AUTH"
 }
 
+resource "aws_ecr_repository" "example_node_app" {
+  name = "example-node-app"
+}
+
 resource "aws_security_group" "maingroup" {
   egress = [
     {
