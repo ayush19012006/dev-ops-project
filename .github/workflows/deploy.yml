@@ -2,6 +2,7 @@ name: CI/CD with Terraform
 on:
   push:
     branches:
+      - main
       - Complete-CI/CD-with-Terraform
 
 env:
