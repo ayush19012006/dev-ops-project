@@ -44,6 +44,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "server" {
   ami = data.aws_ami.ubuntu.id
     instance_type = "t3.micro"
+    associate_public_ip_address = true
     key_name = aws_key_pair.deployer.key_name
     vpc_security_group_ids = [aws_security_group.maingroup.id]
     iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
