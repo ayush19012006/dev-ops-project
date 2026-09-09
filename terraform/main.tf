@@ -16,8 +16,23 @@ provider "aws" {
 	region = var.region
 }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"]
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
 resource "aws_instance" "server" {
-    ami = "ami-091b599f5f318ddd2"
+  ami = data.aws_ami.ubuntu.id
     instance_type = "t3.micro"
     key_name = aws_key_pair.deployer.key_name
     vpc_security_group_ids = [aws_security_group.maingroup.id]
@@ -66,7 +81,7 @@ resource "aws_security_group" "maingroup" {
         to_port = 22
     },
     {
-      cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = ["0.0.0.0/0"]
         description = "Allow HTTP traffic"  
         from_port = 80
         ipv6_cidr_blocks = []
